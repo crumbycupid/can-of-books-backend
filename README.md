@@ -1,11 +1,30 @@
-# Start your own "Can of Books" App
+# Can Of Books Backend 
 
-This repository has starter code to begin work on creating your own online bookshelf.
+**Author**: Dylan Cabral, Martin Hansen, Devon Terry
+**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
-## What can books do?
+## Overview
+Creating a front end and backend server for a can of books website. 
 
-Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next.
+## Getting Started
+Create front end and back end api. Deploy both, front end to Netlify, backend to render, server to MongoDB. Get proof of life for both sites. 
 
-## Use this template
+## Architecture
+JavaScript, Render, MongoDB, CSS, JSX
 
-Clone this repo to your own account with the green "Use this template" button. Then, add any collaborators. Now you are ready to start adding features! Deploy your site to let the world know which books have had the greatest impact on you, and what's recommended. Enjoy!
+## Change Log
+
+11-21-2022 5:00pm - Application created and front end and backend servers created. 
+
+## Estimates
+Name of feature: Front end and Backend servers running
+Estimate of time needed to complete: 4hrs
+
+Start time: 5:00pm
+
+Finish time: tbd
+
+Actual time needed to complete: tbd
+
+## Credit and Collaborations
+Devon Terry, Dylan Cabral, Martin Hansen. 
