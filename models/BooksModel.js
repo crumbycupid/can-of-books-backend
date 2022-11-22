@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+//new book schema to be made for backend
 const bookSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
