@@ -6,12 +6,6 @@ const BooksModel = require('./models/BooksModel');
 mongoose.connect(process.env.MONGODB);
 
 async function seed() {
-  // const BooksModel = new Schema({
-  //   title: { type: String, required: true },
-  //   description: { type: String, required: true },
-  //   status: { type: String, required: true },
-  // });
-
   await BooksModel.create({
     title: 'Harry Potter',
     description: 'mid honestly',
