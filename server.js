@@ -28,7 +28,7 @@ app.get('/test', (request, response, next) => {
 
 app.get('/book', (request, response, next) => {
   try {
-    
+
   } catch (error) {
     next(error);
   }
