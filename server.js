@@ -38,16 +38,11 @@ app.get('/books', getBooks);
 
 async function getBooks(req, res, next) {
   try {
-  working
-
-  } catch (error) {
-    next(error);
     // get cat data from the database
     let results = await Books.find();
     res.status(200).send(results);
   } catch(err) {
     next(err);
- main
   }
 }
 
