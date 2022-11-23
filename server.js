@@ -1,5 +1,4 @@
 'use strict';
-//console.log
 //requires
 require('dotenv').config();
 const express = require('express');
@@ -14,9 +13,10 @@ const app = express();
 
 // middleware
 app.use(cors());
-
+app.use(express.json());
 const PORT = process.env.PORT || 3002;
 
+// Test mongoose connection
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
@@ -36,8 +36,10 @@ app.get('/test', (request, response) => {
 
 app.get('/books', getBooks);
 app.post('/books', postBooks);
-app.delete('/books:id', deleteBooks);
+app.delete('/books/:id', deleteBooks);
 
+
+//GET POST DELETE functions
 async function getBooks(req, res, next) {
   try {
     // get cat data from the database
@@ -51,6 +53,7 @@ async function getBooks(req, res, next) {
 
 async function postBooks(req, res, next) {
   try {
+    console.log(req.body);
     let createdBook = await Books.create(req.body);
     res.send(createdBook);
   } catch(err) {
@@ -63,7 +66,7 @@ async function deleteBooks(req, res, next){
     await Books.findByIdAndDelete(req.params.id);
     res.send('book deleted');
   }catch(err){
-    next(err)
+    next(err);
   }
 }
 
