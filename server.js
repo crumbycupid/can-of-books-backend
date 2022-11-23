@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 
 //Books schema
 const Books = require('./models/BooksModel');
+const BooksModel = require('./models/BooksModel');
 const app = express();
 
 // middleware
@@ -37,6 +38,7 @@ app.get('/test', (request, response) => {
 app.get('/books', getBooks);
 app.post('/books', postBooks);
 app.delete('/books/:id', deleteBooks);
+app.put('/books/:id', putBooks);
 
 
 //GET POST DELETE functions
@@ -46,7 +48,7 @@ async function getBooks(req, res, next) {
     let results = await Books.find();
     console.log(results);
     res.status(200).send(results);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 }
@@ -56,20 +58,29 @@ async function postBooks(req, res, next) {
     console.log(req.body);
     let createdBook = await Books.create(req.body);
     res.send(createdBook);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 }
 
-async function deleteBooks(req, res, next){
+async function deleteBooks(req, res, next) {
   try {
     await Books.findByIdAndDelete(req.params.id);
     res.send('book deleted');
-  }catch(err){
+  } catch (err) {
     next(err);
   }
 }
 
+async function putBooks(req, res, next) {
+  try {
+    const { title, description, status } = req.body;
+    const updatedBook = await BooksModel.findByIdAndUpdate(req.params.id, { title, description, status }, { new: true, overwrite: true });
+    res.status(200).send(updatedBook);
+  } catch (err) {
+    next(err);
+  }
+}
 app.get('*', (request, response,) => {
   response.status(404).send('Not available');
 });
