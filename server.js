@@ -40,6 +40,7 @@ async function getBooks(req, res, next) {
   try {
     // get cat data from the database
     let results = await Books.find();
+    console.log(results);
     res.status(200).send(results);
   } catch(err) {
     next(err);
