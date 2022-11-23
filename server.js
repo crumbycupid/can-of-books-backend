@@ -1,5 +1,5 @@
 'use strict';
-
+//console.log
 //requires
 require('dotenv').config();
 const express = require('express');
@@ -38,16 +38,12 @@ app.get('/books', getBooks);
 
 async function getBooks(req, res, next) {
   try {
-  working
-
-  } catch (error) {
-    next(error);
     // get cat data from the database
     let results = await Books.find();
+    console.log(results);
     res.status(200).send(results);
   } catch(err) {
     next(err);
- main
   }
 }
 
