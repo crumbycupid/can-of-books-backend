@@ -48,4 +48,4 @@ Actual time needed to complete: 2hrs
 
 
 ## Credit and Collaborations
-Devon Terry, Dylan Cabral, Martin Hansen, Sheyna, TA's 
+Devon Terry, Dylan Cabral, Martin Hansen, Sheyna, Justin, Tammy, DeShon, Mike. 
