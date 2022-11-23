@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 
 //Books schema
 const Books = require('./models/BooksModel');
-const BooksModel = require('./models/BooksModel');
 const app = express();
 
 // middleware
@@ -38,7 +37,7 @@ app.get('/test', (request, response) => {
 app.get('/books', getBooks);
 app.post('/books', postBooks);
 app.delete('/books/:id', deleteBooks);
-app.put('/books/:id', putBooks);
+//app.put('/books/:id', putBooks);
 
 
 //GET POST DELETE functions
@@ -72,3 +71,8 @@ async function deleteBooks(req, res, next) {
     next(err);
   }
 }
+app.get('*', (request, response,) => {
+  response.status(404).send('Not available');
+});
+
+app.listen(PORT, () => console.log(`listening on ${PORT}`));
