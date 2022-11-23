@@ -67,7 +67,11 @@ async function deleteBooks(req, res, next) {
   try {
     await Books.findByIdAndDelete(req.params.id);
     res.send('book deleted');
+ working
+  }catch(err){
+
   } catch (err) {
+ main
     next(err);
   }
 }
