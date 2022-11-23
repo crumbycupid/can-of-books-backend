@@ -67,26 +67,8 @@ async function deleteBooks(req, res, next) {
   try {
     await Books.findByIdAndDelete(req.params.id);
     res.send('book deleted');
- working
-  }catch(err){
 
-  } catch (err) {
- main
-    next(err);
-  }
-}
-
-async function putBooks(req, res, next) {
-  try {
-    const { title, description, status } = req.body;
-    const updatedBook = await BooksModel.findByIdAndUpdate(req.params.id, { title, description, status }, { new: true, overwrite: true });
-    res.status(200).send(updatedBook);
   } catch (err) {
     next(err);
   }
 }
-app.get('*', (request, response,) => {
-  response.status(404).send('Not available');
-});
-
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
