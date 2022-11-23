@@ -63,7 +63,7 @@ async function deleteBooks(req, res, next){
     await Books.findByIdAndDelete(req.params.id);
     res.send('book deleted');
   }catch(err){
-    next(err)
+    next(err);
   }
 }
 
