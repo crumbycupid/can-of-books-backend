@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 
 //Books schema
 const Books = require('./models/BooksModel');
-const BooksModel = require('./models/BooksModel');
 const app = express();
 
 // middleware
@@ -75,12 +74,13 @@ async function deleteBooks(req, res, next) {
 async function putBooks(req, res, next) {
   try {
     const { title, description, status } = req.body;
-    const updatedBook = await BooksModel.findByIdAndUpdate(req.params.id, { title, description, status }, { new: true, overwrite: true });
+    const updatedBook = await Books.findByIdAndUpdate(req.params.id, { title, description, status }, { new: true, overwrite: true });
     res.status(200).send(updatedBook);
   } catch (err) {
     next(err);
   }
 }
+
 app.get('*', (request, response,) => {
   response.status(404).send('Not available');
 });
