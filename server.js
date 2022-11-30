@@ -3,15 +3,14 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-
-// Mongoose
 const mongoose = require('mongoose');
 
 //Books schema
 const Books = require('./models/BooksModel');
-const app = express();
+const verifyUser = require('./auth/auth.js');
 
 // middleware
+const app = express();
 app.use(cors());
 app.use(express.json());
 const PORT = process.env.PORT || 3002;
@@ -30,10 +29,6 @@ app.get('/', (request, response) => {
   response.status(200).send('Welcome!');
 });
 
-app.get('/test', (request, response) => {
-  response.send('test request received');
-});
-
 app.get('/books', getBooks);
 app.post('/books', postBooks);
 app.delete('/books/:id', deleteBooks);
@@ -41,20 +36,43 @@ app.put('/books/:id', putBooks);
 
 
 //GET POST DELETE functions
-async function getBooks(req, res, next) {
-  try {
-    // get cat data from the database
-    let results = await Books.find();
-    console.log(results);
-    res.status(200).send(results);
-  } catch (err) {
-    next(err);
-  }
+async function getBooks(req, res) {
+  //   try {
+  //     // get cat data from the database
+  //     let results = await Books.find();
+  //     console.log(results);
+  //     res.status(200).send(results);
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // }
+
+  // verify who the user is before letting them make their request
+  verifyUser(req, async (err, user) => {
+    if (err) {
+      console.log(err);
+      res.send('invalid token');
+    } else {
+
+      try {
+        const booksFromDb = await Books.find();
+        if (booksFromDb.length > 0) {
+          res.status(200).send(booksFromDb);
+        } else {
+          res.status(404).send('error');
+        }
+      } catch (err) {
+        console.error(err);
+        res.status(500).send('server error');
+      }
+
+    }
+  });
 }
 
 async function postBooks(req, res, next) {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     let createdBook = await Books.create(req.body);
     res.send(createdBook);
   } catch (err) {
