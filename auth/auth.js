@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 // jwks = JSON Web Key Set (also pronounced Ja-wicks)
 const jwksClient = require('jwks-rsa');
 
-// the jwksUri comesd from your Auth0 account page (the "key page"). Account Page -> advanced settings -> Endpoints -> 0auth -> JSON Web Key Set
+// the jwksUri comes from your Auth0 account page (the "key page"). Account Page -> advanced settings -> Endpoints -> 0auth -> JSON Web Key Set
 const client = jwksClient({
   jwksUri: process.env.JWKS_URI
 });
@@ -26,7 +26,7 @@ function verifyUser(req, errorFirstOrUserCallbackFunction) {
   try {
     // extract the token from the user's request
     const token = req.headers.authorization.split(' ')[1];
-    console.log(token);
+    // console.log(token);
     // from jsonwebtoken docs
     jwt.verify(token, getKey, {}, errorFirstOrUserCallbackFunction);
   } catch(error) {
