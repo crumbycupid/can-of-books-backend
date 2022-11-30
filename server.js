@@ -52,6 +52,29 @@ async function getBooks(req, res, next) {
   }
 }
 
+// verifyUser(req, async (err, user) => {
+//   if (err) {
+//     console.log(err);
+//     res.send('invalid token');
+//   } else {
+
+
+//     try {
+//       const booksFromDb = await Book.find();
+//       if (booksFromDb.length > 0) {
+//         res.status(200).send(booksFromDb);
+//       } else {
+//         res.status(404).send('error');
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       res.status(500).send('server error');
+//     }
+
+
+//   }
+// });
+
 async function postBooks(req, res, next) {
   try {
     console.log(req.body);
