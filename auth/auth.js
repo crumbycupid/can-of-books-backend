@@ -2,10 +2,8 @@
 
 // jwt = JSON web token (also pronounced Jot);
 const jwt = require('jsonwebtoken');
-
 // jwks = JSON Web Key Set (also pronounced Ja-wicks)
 const jwksClient = require('jwks-rsa');
-
 // the jwksUri comes from your Auth0 account page (the "key page"). Account Page -> advanced settings -> Endpoints -> 0auth -> JSON Web Key Set
 const client = jwksClient({
   jwksUri: process.env.JWKS_URI
@@ -15,7 +13,7 @@ const client = jwksClient({
 // this comes from the jsonwebtoken docs
 // https://www.npmjs.com/package/jsonwebtoken (search for auth0)
 function getKey(header, callback) {
-  client.getSigningKey(header.kid, function(err, key) {
+  client.getSigningKey(header.kid, function (err, key) {
     var signingKey = key.publicKey || key.rsaPublicKey;
     callback(null, signingKey);
   });
@@ -29,7 +27,7 @@ function verifyUser(req, errorFirstOrUserCallbackFunction) {
     // console.log(token);
     // from jsonwebtoken docs
     jwt.verify(token, getKey, {}, errorFirstOrUserCallbackFunction);
-  } catch(error) {
+  } catch (error) {
     errorFirstOrUserCallbackFunction('not authorized');
   }
 }

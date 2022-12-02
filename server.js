@@ -37,16 +37,6 @@ app.put('/books/:id', putBooks);
 
 //GET POST DELETE functions
 async function getBooks(req, res) {
-  //   try {
-  //     // get cat data from the database
-  //     let results = await Books.find();
-  //     console.log(results);
-  //     res.status(200).send(results);
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // }
-
   // verify who the user is before letting them make their request
   verifyUser(req, async (err, user) => {
     if (err) {
@@ -55,7 +45,7 @@ async function getBooks(req, res) {
     } else {
 
       try {
-        const booksFromDb = await Books.find();
+        const booksFromDb = await Books.find({email: user.email});
         if (booksFromDb.length > 0) {
           res.status(200).send(booksFromDb);
         } else {
@@ -71,13 +61,21 @@ async function getBooks(req, res) {
 }
 
 async function postBooks(req, res, next) {
-  try {
-    // console.log(req.body);
-    let createdBook = await Books.create(req.body);
-    res.send(createdBook);
-  } catch (err) {
-    next(err);
-  }
+  verifyUser(req, async (err, user) => {
+    if (err) {
+      console.log(err);
+      res.send('invalid token');
+    } else {
+      console.log(req.body);
+      try {
+        let createdBook = await Books.create({ email: user.email, ...req.body});
+        res.send(createdBook);
+      } catch (err) {
+        next(err);
+      }
+
+    }
+  });
 }
 
 async function deleteBooks(req, res, next) {
