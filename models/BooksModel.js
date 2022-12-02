@@ -5,10 +5,12 @@ const { Schema } = mongoose;
 
 //new book schema to be made for backend
 const bookSchema = new Schema({
+  email: { type: String, required: true},
   title: { type: String, required: true },
   description: { type: String, required: true },
   status: { type: String, required: true },
 });
+
 
 const BooksModel  = mongoose.model('Book', bookSchema);
 
